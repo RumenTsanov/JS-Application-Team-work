@@ -1,8 +1,8 @@
 /**
- * Created by Antoan on 9/26/2016.
+ * !!!!!!! Тhis file is not currently in use! !!!!!!!
  */
 import { data } from './data.js'
-import  { temlateLoader as tl } from './template-loader.js'
+import  { templates } from './templates.js'
 
 var router = (() => {
     let navigo;
@@ -25,7 +25,8 @@ var router = (() => {
             })
             .on('',()=>{
                 $('#content').html('');
-            }).resolve();
+            })
+            .resolve();
 
         function getQueryParams(query) {
             let hash, vars = {},

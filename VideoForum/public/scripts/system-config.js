@@ -11,6 +11,7 @@ SystemJS.config({
         'systemjs-babel-build':
             './node_modules/systemjs-plugin-babel/systemjs-babel-browser.js',
         // app start script
-        'main': './scripts/main.js'
+        'main': './scripts/main.js', 
+        'jquery': './../bower_components/jquery/dist/jquery.js'
     }
 });

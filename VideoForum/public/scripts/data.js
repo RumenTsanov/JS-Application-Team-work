@@ -1,8 +1,6 @@
 
 var data = (function () {
 
-
-
     // start users
     function userRegister(username,pasword,email,displayName) {
         return new Promise((resolve,reject) => {
@@ -34,8 +32,8 @@ var data = (function () {
     }
     // end users
 
-    // start threads
-    function threadsGet() {
+    // start posts
+    function postsGet() {
         return new Promise((resolve,reject) => {
             $.getJSON('/api/posts')
                 .done(resolve)
@@ -43,19 +41,19 @@ var data = (function () {
         })
     }
 
-    function threadsAdd(title) {
+    function postsAdd(title) {
 
 
     }
 
-    function threadById(id) {
+    function postById(id) {
 
     }
 
-    function threadsAddMessage(threadId, content) {
+    function postsAddComment(postId, content) {
 
     }
-    // end threads
+    // end posts
 
 
     return {
@@ -65,11 +63,11 @@ var data = (function () {
             logout: userLogout,
             current: userGetCurrent
         },
-        threads: {
-            get: threadsGet,
-            add: threadsAdd,
-            getById: threadById,
-            addMessage: threadsAddMessage
+        posts: {
+            get: postsGet,
+            add: postsAdd,
+            getById: postById,
+            addMessage: postsAddComment
         }
     }
 })();
