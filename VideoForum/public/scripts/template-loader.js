@@ -1,4 +1,4 @@
-s/**
+/**
  * Created by Antoan on 9/26/2016.
  */
 const temlateLoader = (()=>{

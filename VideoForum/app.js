@@ -73,6 +73,14 @@ app.post('/api/posts/:id/messages', function(req, res) {
             });
 });
 
+app.post('/api/register',function (req,res) {
+    var userData = req.body
+    db.Users.register(userData.username,userData.password,{
+        Email: userData.email,
+        DisplayName: userData.displayName
+    },console.log,console.log);
+})
+
 var port = 1509;
 app.listen(port, function() {
     console.log(`Server is running at http://localhost:${port}`);

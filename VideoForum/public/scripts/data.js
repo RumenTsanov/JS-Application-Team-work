@@ -4,6 +4,23 @@ var data = (function () {
 
 
     // start users
+    function userRegister(username,pasword,email,displayName) {
+        return new Promise((resolve,reject) => {
+            let body = {
+                'username': username,
+                'password': pasword,
+                'email': email,
+                'displayName': displayName
+            }
+            $.ajax({
+                 type: 'POST',
+                  url: 'api/register',
+                data: JSON.stringify(data),
+                contentType: 'application/json'
+            }).done(resolve)
+                .fail(reject)
+        })
+    }
     function userLogin(username,password) {
 
     }
@@ -19,7 +36,11 @@ var data = (function () {
 
     // start threads
     function threadsGet() {
-
+        return new Promise((resolve,reject) => {
+            $.getJSON('/api/posts')
+                .done(resolve)
+                .fail(reject)
+        })
     }
 
     function threadsAdd(title) {
@@ -39,6 +60,7 @@ var data = (function () {
 
     return {
         users: {
+            register : userRegister,
             login: userLogin,
             logout: userLogout,
             current: userGetCurrent
