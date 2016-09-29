@@ -7,7 +7,7 @@ const templates = (()=>{
             if(cache[templateName]){
                 resolve(cache[templateName])
             } else {
-                $.get(`templates/${templateName}.html`)
+                $.get(`templates/${templateName}.handlebars`)
                     .done((data)=> {
                         let templateData = Handlebars.compile(data);
                         cache[templateName] = templateData;

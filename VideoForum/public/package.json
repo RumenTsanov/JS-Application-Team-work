@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bower": "^1.7.9",
     "handlebars": "^4.0.5",
     "navigo": "^3.0.0",
     "systemjs": "^0.19.39",
