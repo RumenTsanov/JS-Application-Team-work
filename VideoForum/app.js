@@ -3,6 +3,14 @@ var express = require('express'),
 var Everlive = require('everlive-sdk');
 var db = new Everlive('2w3chu0yie1f0qjv');
 
+db.authentication.login('project', // username
+    'project', // password
+    function(data) { // success callback
+        console.log("Log in");
+    },
+    function(error) { // error callback
+        console.log("Cannot log in");
+    });
 
 var app = express();
 
@@ -16,7 +24,10 @@ app.post('/api/posts', function(req, res) {
     var posts = db.data('Post');
     posts.create({
             'Messages': [],
-            'Content': post.Content
+            'Content': post.Content,
+            'Title': post.Title,
+            'Rating': post.Rating,
+            'Url': post.Url
         },
         function(data) {
             console.log('Create post.');
@@ -42,6 +53,7 @@ app.get('/api/posts/:id', function(req, res) {
             },
             function(error) {
                 console.log("Cannot get post.");
+                res.json({ data: error });
             });
 });
 
@@ -56,10 +68,10 @@ app.post('/api/posts/:id/messages', function(req, res) {
                 messages.push(message);
                 posts.updateSingle({ Id: id, 'Messages': messages },
                     function(data) {
-                        console.log("Added done.");
+                        res.json({ data: "done" });
                     },
                     function(error) {
-                        console.log("Error add message.");
+                        res.json({ data: "error" });
                     });
             },
             function(error) {
@@ -67,37 +79,48 @@ app.post('/api/posts/:id/messages', function(req, res) {
             });
 });
 
-app.post('/api/register',function (req,res) {
-    var userData = req.body
-    var attributes = {'Email': userData.email, 'DisplayName': userData.displayName}
-   db.Users.register(userData.username,userData.password,(data)=>{
-        console.log(data);
-    },(err) => {
-        console.log(err);
-    });
-})
+app.post('/api/register', function(req, res) {
+    var username = req.body.Username;
+    var password = req.body.Password;
+    var attrs = {
+        Email: req.body.Email,
+        DisplayName: req.body.DisplayName
+    };
 
-app.post('/api/auth',function (req,res) {
-    var userData = req.body
-    console.log(userData);
-    db.authentication.login(userData.username,
-        userData.password,
-        function(data) { // success callback
-            console.log("Log in");
-            res.json({
-                username: userData.username
-            });
+    db.Users.register(username,
+        password,
+        attrs,
+        function(data) {
+            console.log("Register user with name: " + username);
+            res.json({ data: "done" });
         },
-        function(error) { // error callback
-            console.log("Cannot log in");
+        function(error) {
+            res.json({ data: "error" });
         });
 })
-app.delete('/api/logout', function (req, res) {
+
+app.post('/api/login', function(req, res) {
+    var userData = req.body;
+    console.log(userData);
+    db.authentication.login(userData.Username,
+        userData.Password,
+        function(data) { // success callback
+            console.log("Log in with name: " + userData.Username);
+            res.json({ data: userData.Username });
+        },
+        function(error) { // error callback
+            console.log("Cannot log in with name: " + userData.Username);
+            res.json({ data: "Error" });
+        });
+});
+
+app.post('/api/logout', function(req, res) {
     db.authentication.logout(function() {
         console.log("Logout successful!");
         res.sendStatus(200);
     }, function(err) {
         console.log("Failed to logout: " + err.message);
+        res.sendStatus(400);
     });
 });
 
