@@ -2,14 +2,7 @@ var express = require('express'),
     bodyParser = require('body-parser');
 var Everlive = require('everlive-sdk');
 var db = new Everlive('2w3chu0yie1f0qjv');
-db.authentication.login('project', // username
-    'project', // password
-    function(data) { // success callback
-        console.log("Log in");
-    },
-    function(error) { // error callback
-        console.log("Cannot log in");
-    });
+
 
 var app = express();
 
@@ -19,6 +12,7 @@ app.use(express.static('public'));
 
 app.post('/api/posts', function(req, res) {
     var post = req.body;
+    console.log(post);
     var posts = db.data('Post');
     posts.create({
             'Messages': [],
@@ -75,11 +69,37 @@ app.post('/api/posts/:id/messages', function(req, res) {
 
 app.post('/api/register',function (req,res) {
     var userData = req.body
-    db.Users.register(userData.username,userData.password,{
-        Email: userData.email,
-        DisplayName: userData.displayName
-    },console.log,console.log);
+    var attributes = {'Email': userData.email, 'DisplayName': userData.displayName}
+   db.Users.register(userData.username,userData.password,(data)=>{
+        console.log(data);
+    },(err) => {
+        console.log(err);
+    });
 })
+
+app.post('/api/auth',function (req,res) {
+    var userData = req.body
+    console.log(userData);
+    db.authentication.login(userData.username,
+        userData.password,
+        function(data) { // success callback
+            console.log("Log in");
+            res.json({
+                username: userData.username
+            });
+        },
+        function(error) { // error callback
+            console.log("Cannot log in");
+        });
+})
+app.delete('/api/logout', function (req, res) {
+    db.authentication.logout(function() {
+        console.log("Logout successful!");
+        res.sendStatus(200);
+    }, function(err) {
+        console.log("Failed to logout: " + err.message);
+    });
+});
 
 var port = 1509;
 app.listen(port, function() {
