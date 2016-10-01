@@ -55,7 +55,7 @@ var data = (function () {
 
     // start posts
     function postsGet() {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve , reject) => {
             $.getJSON('/api/posts')
                 .done(resolve)
                 .fail(reject)
@@ -83,7 +83,11 @@ var data = (function () {
     }
 
     function postById(id) {
-
+    return new Promise((resolve, reject) => {
+      $.getJSON(`api/posts/${id}`)
+        .done(resolve)
+        .fail(reject);
+    })
     }
 
     function postsAddComment(postId, content) {

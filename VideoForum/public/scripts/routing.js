@@ -1,31 +1,18 @@
-/**
- * !!!!!!! Тhis file is not currently in use! !!!!!!!
- */
-import { data } from './data.js'
-import  { templates } from './templates.js'
+
+import { homeController } from '../controllers/home-controller.js';
+import { postsController } from '../controllers/posts-controller.js';
 
 var router = (() => {
     let navigo;
+
     function init() {
 
-        navigo = new Navigo(null,false);
-        navigo.on('/threads/:id',(params) => {
-            Promise.all([data.threads.getById(params.id),tl.get('messages')])
-                .then(([data,template]) => {
-                    console.log(data);
-                    $('#content').append(template(data))
-                }).catch(console.log)
-        })
-            .on('/threads',() => {
-                Promise.all([data.threads.get(),tl.get('threads')])
-                    .then(([data,template]) => {
-                        console.log(data);
-                        $('#content').html(template(data))
-                    }).catch(console.log)
-            })
-            .on('',()=>{
-                $('#content').html('');
-            })
+        navigo = new Navigo(null, false);
+        navigo
+            .on('/posts/:id', postsController.getById)
+            .on('/posts/new-post', postsController.add)
+            .on('/posts', postsController.all)
+            .on('/', homeController.all)          
             .resolve();
 
         function getQueryParams(query) {
