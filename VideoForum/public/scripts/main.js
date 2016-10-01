@@ -1,13 +1,7 @@
 import { templates } from './templates.js';
 import { router } from './routing.js';
 
-<<<<<<< HEAD
-let router = new Navigo(null, true);
-
-router
-    .on('', homeController.all)
-    .on('/posts', postsController.all)
-    .resolve();
+router.init();
 
 //Log in events and requests logic!
 
@@ -46,6 +40,3 @@ $('#btn-register').on('click', function() {
         }
     });
 });
-=======
-router.init();
->>>>>>> 9e6692a7001fcaee49f364739979ce50a07f2d3b
