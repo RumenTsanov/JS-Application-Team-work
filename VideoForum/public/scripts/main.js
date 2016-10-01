@@ -1,7 +1,7 @@
 import { templates } from './templates.js';
-import { homeController } from '../controllers/home-controller.js';
-import { postsController } from '../controllers/posts-controller.js';
+import { router } from './routing.js';
 
+<<<<<<< HEAD
 let router = new Navigo(null, true);
 
 router
@@ -46,3 +46,6 @@ $('#btn-register').on('click', function() {
         }
     });
 });
+=======
+router.init();
+>>>>>>> 9e6692a7001fcaee49f364739979ce50a07f2d3b
