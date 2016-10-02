@@ -36,14 +36,34 @@ let usersContoller = function() {
                 .then(function() {
                     context.redirect('#/');
                     document.location.reload(true);
+                }).then(function() {
+                    $('.input-group').hide();
+                    $('#btn-login').html('Logout');
                 });
         });
 
     }
 
+    function logout(context) {
+        var btnLogout = $('#btn-login');
+        if (btnLogout.html() === 'Logout') {
+            $('#btn-login').on('click', function() {
+                data.users.logout(user)
+                    .then(function() {
+                        context.redirect('#/');
+                        document.location.reload(true);
+                    }).then(function() {
+                        $('.input-group').show();
+                        $('#btn-login').html('Login');
+                    });
+            });
+        }
+    }
+
     return {
         register: register,
-        login: login
+        login: login,
+        logout: logout
     };
 }();
 
