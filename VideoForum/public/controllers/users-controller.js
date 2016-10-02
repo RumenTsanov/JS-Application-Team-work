@@ -6,7 +6,7 @@ let usersController = function() {
     function register(context) {
         templates.get('register')
             .then(function(template) {
-                context.$element().html(template());
+                $('#content').html(template());
 
                 $('#btn-register').on('click', function() {
                     var user = {
