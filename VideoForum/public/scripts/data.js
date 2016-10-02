@@ -4,36 +4,35 @@ var data = (function() {
     function userRegister(user) {
         return new Promise((resolve, reject) => {
             let body = {
-                username: user.username,
-                password: user.password,
-                email: user.email,
-                displayName: user.displayName
+                Username: user.username,
+                Password: user.password,
+                Email: user.email,
+                DisplayName: user.displayName
             };
             $.ajax({
                     type: 'POST',
                     url: 'api/register',
-                    data: JSON.stringify(body),
                     contentType: 'application/json',
+                    data: JSON.stringify(body),
                 }).done((data) => resolve(data))
                 .fail((err) => reject(err));
-
         })
     }
 
     function userLogin(user) {
         return new Promise((resolve, reject) => {
             let body = {
-                uername: user.username,
-                password: user.password
+                Username: user.Username,
+                Password: user.Password
             };
             $.ajax({
-                    type: 'PUT',
+                    type: 'POST',
                     url: 'api/login',
                     data: JSON.stringify(body),
                     contentType: 'application/json',
                     success: function(user) {
                         console.log('suces is trigerd');
-                        localStorage.setItem('User', user.username);
+                        localStorage.setItem('Current-User', JSON.stringify(body));
                     }
                 }).done(resolve)
                 .fail(reject);
@@ -98,7 +97,7 @@ var data = (function() {
     }
 
     function postsAddComment(postId, content) {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve, reject) => {
             userGetCurrent()
                 .then((username) => {
                     let body = {
@@ -107,11 +106,11 @@ var data = (function() {
                     }
 
                     $.ajax({
-                        type: 'POST',
-                        url: '/api/posts/'+postId+'/messages',
-                        data: JSON.stringify(body),
-                        contentType: 'application/json'
-                    })
+                            type: 'POST',
+                            url: '/api/posts/' + postId + '/messages',
+                            data: JSON.stringify(body),
+                            contentType: 'application/json'
+                        })
                         .done(resolve)
                         .fail(reject);
 

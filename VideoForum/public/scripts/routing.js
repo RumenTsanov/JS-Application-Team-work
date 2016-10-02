@@ -13,8 +13,8 @@ var router = (() => {
             .on('/posts/add', postsController.add)
             .on('/posts/:id', postsController.getById)
             .on('/posts', postsController.all)
-            .on('/', homeController.all)
             .on('/register', usersController.register)
+            .on('/', homeController.all)
             .resolve();
 
         function getQueryParams(query) {

@@ -110,7 +110,7 @@ app.post('/api/login', function(req, res) {
         },
         function(error) { // error callback
             console.log("Cannot log in with name: " + userData.Username);
-            res.json({ data: "Error" });
+            res.sendStatus(500);
         });
 });
 

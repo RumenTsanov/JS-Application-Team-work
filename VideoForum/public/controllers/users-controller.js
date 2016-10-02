@@ -4,22 +4,32 @@ import { data } from '../scripts/data.js';
 let usersController = function() {
 
     function register(context) {
+        console.log("Register");
         templates.get('register')
             .then(function(template) {
                 $('#content').html(template());
-
+            }).then(() => {
+                console.log($("#content").html());
                 $('#btn-register').on('click', function() {
-                    var user = {
-                        username: $('#tb-username').val(),
-                        password: $('#tb-password').val(),
-                        email: $('#tb-email').val(),
-                        displayName: $('#tb-displayName').val()
-                    };
+                    if ($('#username-register').val() != "" && $('#password-register').val() != "") {
+                        console.log("Send registration.");
+                        var user = {
+                            username: $('#username-register').val(),
+                            password: $('#password-register').val(),
+                            email: $('#tb-email').val(),
+                            displayName: $('#tb-displayName').val()
+                        };
 
-                    data.users.register(user)
-                        .then(function() {
-                            router.navigate('#/');
-                        });
+                        data.users.register(user)
+                            .then(function() {
+                                localStorage.setItem("Current-User", JSON.stringify({ Username: user.username, Password: user.password }));
+                                location.hash = "";
+                                location.reload();
+                            });
+                    } else {
+                        console.log($('#username-register').val());
+                        console.log("Can't send registration." + " " + $('#tb-username').val() + " " + $('#tb-password').val());
+                    }
                 });
             });
     }
