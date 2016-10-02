@@ -1,7 +1,7 @@
 var data = (function() {
 
     // start users
-    function userRegister(username, password, email, displayName) {
+    function userRegister(user) {
         return new Promise((resolve, reject) => {
             let body = {
                 username: user.username,
@@ -20,7 +20,7 @@ var data = (function() {
         })
     }
 
-    function userLogin(username, password) {
+    function userLogin(user) {
         return new Promise((resolve, reject) => {
             let body = {
                 uername: user.username,
