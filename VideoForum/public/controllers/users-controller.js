@@ -26,7 +26,7 @@ let usersContoller = function() {
     }
 
     function login(context) {
-        $.('#btn-login').on('click', function() {
+        $('#btn-login').on('click', function() {
             var user = {
                 username: $('#tb-username').val(),
                 password: $('#tb-password').val(),
