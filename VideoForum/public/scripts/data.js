@@ -3,7 +3,12 @@ var data = (function() {
     // start users
     function userRegister(username, password, email, displayName) {
         return new Promise((resolve, reject) => {
-            let body = { username, password, email, displayName };
+            let body = {
+                username: user.username,
+                password: user.password,
+                email: user.email,
+                displayName: user.displayName
+            };
             $.ajax({
                     type: 'POST',
                     url: 'api/register',
@@ -17,7 +22,10 @@ var data = (function() {
 
     function userLogin(username, password) {
         return new Promise((resolve, reject) => {
-            let body = { uername, password }
+            let body = {
+                uername: user.username,
+                password: user.password
+            };
             $.ajax({
                     type: 'PUT',
                     url: 'api/login',
@@ -63,22 +71,22 @@ var data = (function() {
 
     function postAdd(post) {
         return new Promise((resolve, reject) => {
-                let body = {
-                    Title: post.title,
-                    Content: post.content,
-                    Url: post.url,
-                    Rating: 0
-                }
+            let body = {
+                Title: post.title,
+                Content: post.content,
+                Url: post.url,
+                Rating: 0
+            }
 
-                $.ajax({
-                        type: 'POST',
-                        url: '/api/posts',
-                        data: JSON.stringify(body),
-                        contentType: 'application/json'
-                    })
-                    .done(resolve)
-                    .fail(reject);
-            });
+            $.ajax({
+                    type: 'POST',
+                    url: '/api/posts',
+                    data: JSON.stringify(body),
+                    contentType: 'application/json'
+                })
+                .done(resolve)
+                .fail(reject);
+        });
     }
 
     function postById(id) {
