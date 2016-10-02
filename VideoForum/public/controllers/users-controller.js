@@ -18,8 +18,7 @@ let usersController = function() {
 
                     data.users.register(user)
                         .then(function() {
-                            context.redirect('#/');
-                            document.location.reload(true);
+                            router.navigate('#/');
                         });
                 });
             });
