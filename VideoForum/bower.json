@@ -18,6 +18,8 @@
   "dependencies": {
     "jquery": "^3.1.1",
     "bootstrap": "^3.3.7",
-    "everlive": "^1.7.2"
+    "everlive": "^1.7.2",
+    "mocha": "^3.1.0",
+    "chai": "^3.5.0"
   }
 }
