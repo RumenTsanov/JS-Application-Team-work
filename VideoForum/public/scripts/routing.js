@@ -1,6 +1,7 @@
-
 import { homeController } from '../controllers/home-controller.js';
 import { postsController } from '../controllers/posts-controller.js';
+import { usersController } from '../controllers/users-controller.js';
+
 
 var router = (() => {
     let navigo;
@@ -13,20 +14,20 @@ var router = (() => {
             .on('/posts/:id', postsController.getById)
             .on('/posts', postsController.all)
             .on('/', homeController.all)
-
+            .on('/register', usersController.register)
             .resolve();
 
         function getQueryParams(query) {
             let hash, vars = {},
                 hashes = query.substr(1)
-                    .split('&').forEach(val => {
-                        hash = val.split('=');
-                        vars[hash[0]] = hash[1];
-                    });
+                .split('&').forEach(val => {
+                    hash = val.split('=');
+                    vars[hash[0]] = hash[1];
+                });
             return vars;
         }
     }
-    return{
+    return {
         init
     }
 })();
