@@ -3,9 +3,9 @@
     <div class="row">
         <div class="panel-body">
             <div class="col-sm-4 col-lg-4 col-md-4">
-                <!-- 16:9 aspect ratio -->
+                <!-- 4:3 aspect ratio -->
                 <div class="embed-responsive embed-responsive-4by3">
-                    <iframe class="embed-responsive-item" src="http://placehold.it/320x150"></iframe>
+                    <iframe class="embed-responsive-item" src="{{data.result.Url}}"></iframe>
                 </div>
             </div>
             <div class="col-sm-6 col-lg-6 col-md-6">
@@ -15,19 +15,33 @@
                 </div>
             </div>
             <div class="col-sm-2 col-lg-2 col-md-2">
-                <div class="row well well-sm text-center">
+                <div class="row well well-lg text-center">
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <i class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
+                        <i id="like" class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
                     </div>
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <i class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i>
+                        <i id="dislike" class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i>
                     </div>
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <span class="badge">{{data.result.Rating}}</span>
                     </div>
                 </div>
+                <div class="row well well-lg  text-center">
+                    <div class="col-sm-4 col-lg-4 col-md-4">
+                        <h4>Comments</h4>
+                        <span class="badge">{{data.result.Messages.length}}</span>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        {{#if data.result.Messages.length}}
+        <h4>Comments</h4>
+        {{#data.result.Messages}}
+            <p>{{Message}}</p>
+        {{/data.result.Messages}}
+        {{/if}}
     </div>
     <hr>
 </div>

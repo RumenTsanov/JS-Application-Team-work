@@ -28,23 +28,24 @@ let postsController = function () {
           .then(function(template) {
               $('#content').html(template());
 
-              //let post;
-              //$('#add-post').on('click', () => {
-              //    let videoId = $('#url').val().substr(32, 11);
-              //    let url = 'https://www.youtube.com/embed/' + videoId;
+              let post;
+              $('#add-post').on('click', () => {
+                  let videoId = $('#url').val().substr(32, 11);
+                  let url = 'https://www.youtube.com/embed/' + videoId;
 //
-              //    post = {
-              //        title: $('#title').val(),
-              //       content: $('#content').val(),
-              //        url: url
-              //    };
-              //    data.posts.add(post)
-              //       .then(function () {
-              //            setTimeout(function () {
-              //                document.location = '#/home';
-              //            }, 1000);
-              //        });
-              //});
+                  post = {
+                      title: $('#title').val(),
+                      content: $('textarea#content').val(),
+                      url: url
+                  };
+                  console.log(post);
+                  data.posts.add(post)
+                     .then(function () {
+                          setTimeout(function () {
+                              window.location.href = '#/posts';
+                          }, 1000);
+                      });
+              });
       })
   }
 

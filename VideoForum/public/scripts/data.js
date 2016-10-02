@@ -63,9 +63,7 @@ var data = (function() {
 
     function postAdd(post) {
         return new Promise((resolve, reject) => {
-            userGetCurrent().then((user) => {
                 let body = {
-                    CreatedBy: user,
                     Title: post.title,
                     Content: post.content,
                     Url: post.url,
@@ -81,8 +79,6 @@ var data = (function() {
                     .done(resolve)
                     .fail(reject);
             });
-        });
-
     }
 
     function postById(id) {
