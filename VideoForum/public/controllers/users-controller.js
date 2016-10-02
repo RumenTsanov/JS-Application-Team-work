@@ -1,7 +1,7 @@
 import { templates } from '../scripts/templates.js';
 import { data } from '../scripts/data.js';
 
-let usersContoller = function() {
+let usersController = function() {
 
     function register(context) {
         templates.get('register')
@@ -67,4 +67,4 @@ let usersContoller = function() {
     };
 }();
 
-export { usersContoller };
+export { usersController };
