@@ -98,7 +98,26 @@ var data = (function() {
     }
 
     function postsAddComment(postId, content) {
+        return new Promise((resolve,reject) => {
+            userGetCurrent()
+                .then((username) => {
+                    let body = {
+                        username,
+                        content
+                    }
 
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/posts/'+postId+'/messages',
+                        data: JSON.stringify(body),
+                        contentType: 'application/json'
+                    })
+                        .done(resolve)
+                        .fail(reject);
+
+                })
+
+        });
     }
     // end posts
 
