@@ -47,4 +47,4 @@ let usersContoller = function() {
     };
 }();
 
-export { usersController };
+export { usersContoller };

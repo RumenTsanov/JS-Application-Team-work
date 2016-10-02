@@ -61,20 +61,24 @@ var data = (function() {
         });
     }
 
-    function postsAdd(title) {
+    function postAdd(post) {
         return new Promise((resolve, reject) => {
             userGetCurrent().then((user) => {
                 let body = {
-                    user: user,
-                    Content: title
+                    CreatedBy: user,
+                    Title: post.title,
+                    Content: post.content,
+                    Url: post.url,
+                    Rating: 0
                 }
 
                 $.ajax({
                         type: 'POST',
-                        url: 'api/posts',
+                        url: '/api/posts',
                         data: JSON.stringify(body),
                         contentType: 'application/json'
-                    }).done(resolve)
+                    })
+                    .done(resolve)
                     .fail(reject);
             });
         });
@@ -86,7 +90,7 @@ var data = (function() {
             $.getJSON(`api/posts/${id}`)
                 .done(resolve)
                 .fail(reject);
-        });
+        })
     }
 
     function postsAddComment(postId, content) {
@@ -104,7 +108,7 @@ var data = (function() {
         },
         posts: {
             get: postsGet,
-            add: postsAdd,
+            add: postAdd,
             getById: postById,
             addMessage: postsAddComment
         }

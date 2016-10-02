@@ -10,9 +10,9 @@ var router = (() => {
         navigo = new Navigo(null, false);
         navigo
             .on('/posts/:id', postsController.getById)
-            .on('/posts/new-post', postsController.add)
             .on('/posts', postsController.all)
-            .on('/', homeController.all)          
+            .on('', homeController.all)
+            //.on('/posts/add-post', postsController.add())
             .resolve();
 
         function getQueryParams(query) {
@@ -24,7 +24,6 @@ var router = (() => {
                     });
             return vars;
         }
-
     }
     return{
         init
