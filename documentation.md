@@ -25,7 +25,7 @@ Follow the instructions below to run the Application.
 
 #### [Live demo] (https://cdn.rawgit.com/Team-Vision/JS-Application-Team-work/master/VideoForum/public/index.html)
 
-#### [Short youtube trailer] () 
+#### [Short youtube trailer] (https://youtu.be/cwTjzeP6zd8) 
 
 #### [GitHub] (https://github.com/Team-Vision/JS-Application-Team-work) 
 
