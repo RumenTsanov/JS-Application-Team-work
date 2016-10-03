@@ -27,16 +27,16 @@ Follow the instructions below to run the Application.
 
 #### [Short youtube trailer] () 
 
-#### [Github] (https://github.com/Team-Vision/JS-Application-Team-work) 
+#### [GitHub] (https://github.com/Team-Vision/JS-Application-Team-work) 
 
 #The Team Vision
 
 | Name | TA Profile | Github |
 | :--- | :--- | :---- |
+| Антоан Ленгерджиев | [Antoan_Lengerdjiev] (http://telerikacademy.com/Users/Antoan_Lengerdjiev) | [antoanLengerdjiev] (https://github.com/antoanLengerdjiev) |
+| Давид Мавродиев | [david_mavrodiev] (http://telerikacademy.com/Users/david_mavrodiev) | [David-Mavrodiev] (https://github.com/David-Mavrodiev) |
+| Калин Митрофанов | [Kalin_Mitrofanov] (http://telerikacademy.com/Users/Kalin_Mitrofanov) | [knmitrofanov] (https://github.com/knmitrofanov) |
 | Росица Бъндева | [rossi.bundeva] (http://telerikacademy.com/Users/rossi.bundeva) | [RossyB] (https://github.com/RossyB) |
 | Румен Цанов| [RumenTsanov ] (http://telerikacademy.com/Users/RumenTsanov) | [RumenTsanov] (https://github.com/RumenTsanov) |
-| Давид Мавродиев | [david_mavrodiev] (http://telerikacademy.com/Users/david_mavrodiev) | [David-Mavrodiev] (https://github.com/David-Mavrodiev) |
-| Антоан Ленгерджиев | [Antoan_Lengerdjiev] (http://telerikacademy.com/Users/Antoan_Lengerdjiev) | [antoanLengerdjiev] (https://github.com/antoanLengerdjiev) |
-| Калин Митрофанов | [Kalin_Mitrofanov] (http://telerikacademy.com/Users/Kalin_Mitrofanov) | [knmitrofanov] (https://github.com/knmitrofanov) |
 
 *Season 2016/2017*
