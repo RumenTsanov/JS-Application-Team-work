@@ -23,7 +23,7 @@ Follow the instructions below to run the Application.
  3. Run a local server to view the app in browser
     - run "npm start"
 
-#### [Live demo] (https://cdn.rawgit.com/Team-Vision/JS-Application-Team-work/master/VideoForum/public/index.html)
+#### [Live demo] (https://cdn.rawgit.com/knmitrofanov/JS-Application-Team-work/master/VideoForum/public/index.html)
 
 #### [Short youtube trailer] (https://youtu.be/cwTjzeP6zd8) 
 
