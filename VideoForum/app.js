@@ -27,6 +27,8 @@ app.post('/api/posts', function(req, res) {
             'Content': post.Content,
             'Title': post.Title,
             'Rating': post.Rating,
+            'Likes': 0,
+            'Dislikes': 0,
             'Url': post.Url
         },
         function(data) {
@@ -36,7 +38,6 @@ app.post('/api/posts', function(req, res) {
             console.log('Cannot create post.');
         });
 });
-
 app.get('/api/posts', function(req, res) {
     var posts = db.data('Post');
     posts.get().then(function(data) {
@@ -58,21 +59,39 @@ app.get('/api/posts/:id', function(req, res) {
 });
 
 app.post('/api/posts/:id/messages', function(req, res) {
-    var message = req.body;
+    var message = req.body.Messages;
+    var DoLike = req.body.Like;
+
     console.log("Add message to post with id: " + req.params.id);
     var posts = db.data('Post');
     posts.getById(req.params.id)
         .then(function(data) {
                 var id = data.result.Id;
                 var messages = data.result.Messages;
+                var rating = data.result.Rating;
+                if (DoLike) {
+                    rating++;
+                } else {
+                    rating--;
+                }
                 messages.push(message);
-                posts.updateSingle({ Id: id, 'Messages': messages },
-                    function(data) {
-                        res.json({ data: "done" });
-                    },
-                    function(error) {
-                        res.json({ data: "error" });
-                    });
+                if (message === null || message === undefined || message === []) {
+                    posts.updateSingle({ Id: id, 'Rating': rating },
+                        function(data) {
+                            res.json({ data: "done" });
+                        },
+                        function(error) {
+                            res.json({ data: "error" });
+                        });
+                } else {
+                    posts.updateSingle({ Id: id, 'Messages': messages, 'Rating': rating },
+                        function(data) {
+                            res.json({ data: "done" });
+                        },
+                        function(error) {
+                            res.json({ data: "error" });
+                        });
+                }
             },
             function(error) {
                 console.log("Cannot add message");

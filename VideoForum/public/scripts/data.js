@@ -47,7 +47,7 @@ var data = (function() {
                     url: 'api/logout',
                     success: function() {
                         console.log('successfully remove User token from localStorage');
-                        localStorage.removeItem('User');
+                        localStorage.removeItem('Current-User');
                     }
                 }).done(resolve)
                 .fail(reject);
@@ -55,7 +55,7 @@ var data = (function() {
     }
 
     function userGetCurrent() {
-        return Promise.resolve(localStorage.getItem('User'));
+        return Promise.resolve(JSON.parse(localStorage.getItem('Current-User')));
     }
     // end users
 
@@ -97,14 +97,18 @@ var data = (function() {
     }
 
     function postsAddComment(postId, content) {
+        console.log("Post add comment");
         return new Promise((resolve, reject) => {
             userGetCurrent()
-                .then((username) => {
+                .then((user) => {
                     let body = {
-                        username,
-                        content
+                        Messages: {
+                            Username: user.Username,
+                            Content: content
+                        }
                     }
-
+                    console.log("body");
+                    console.log(body);
                     $.ajax({
                             type: 'POST',
                             url: '/api/posts/' + postId + '/messages',
@@ -113,10 +117,60 @@ var data = (function() {
                         })
                         .done(resolve)
                         .fail(reject);
-
                 })
-
         });
+    }
+
+    function postsAddLike(postId) {
+        var user = JSON.parse(localStorage.getItem("Current-User"));
+        if (localStorage.getItem("Current-User") != null) {
+            if (user.Username != undefined && user.Username != null && (localStorage.getItem(user.Username + " liked " + postId) === null || localStorage.getItem(user.Username + " liked " + postId) === undefined)) {
+                localStorage.setItem(user.Username + " liked " + postId, "true");
+                localStorage.removeItem(user.Username + " disliked " + postId);
+                return new Promise((resolve, reject) => {
+                    let body = {
+                        Like: true
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/posts/' + postId + '/messages',
+                        contentType: 'application/json',
+                        data: JSON.stringify(body),
+                    }).done(resolve).fail(reject);
+                });
+            } else {
+                return Promise.resolve();
+            }
+        } else {
+            return Promise.resolve();
+        }
+    }
+
+    function postsAddDislike(postId) {
+        var user = JSON.parse(localStorage.getItem("Current-User"));
+        if (localStorage.getItem("Current-User") != null) {
+            if (user.Username != undefined && user.Username != null && (localStorage.getItem(user.Username + " disliked " + postId) === null || localStorage.getItem(user.Username + " liked " + postId) === undefined)) {
+                localStorage.setItem(user.Username + " disliked " + postId, "true");
+                localStorage.removeItem(user.Username + " liked " + postId);
+                return new Promise((resolve, reject) => {
+                    let body = {
+                        Like: false
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/posts/' + postId + '/messages',
+                        contentType: 'application/json',
+                        data: JSON.stringify(body),
+                    }).done(resolve).fail(reject);
+                });
+            } else {
+                return Promise.resolve();
+            }
+        } else {
+            return Promise.resolve();
+        }
     }
     // end posts
 
@@ -132,7 +186,9 @@ var data = (function() {
             get: postsGet,
             add: postAdd,
             getById: postById,
-            addMessage: postsAddComment
+            addMessage: postsAddComment,
+            like: postsAddLike,
+            dislike: postsAddDislike
         }
     }
 })();

@@ -17,10 +17,10 @@
             <div class="col-sm-2 col-lg-2 col-md-2">
                 <div class="row well well-lg text-center">
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <i id="like" class="fa fa-thumbs-o-up fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-thumbs-o-up fa-lg like" aria-hidden="true" post-id="{{data.result.Id}}"></i>
                     </div>
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <i id="dislike" class="fa fa-thumbs-o-down fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-thumbs-o-down fa-lg dislike" aria-hidden="true" post-id="{{data.result.Id}}"></i>
                     </div>
                     <div class="col-sm-4 col-lg-4 col-md-4">
                         <span class="badge">{{data.result.Rating}}</span>
@@ -28,8 +28,11 @@
                 </div>
                 <div class="row well well-lg  text-center">
                     <div class="col-sm-4 col-lg-4 col-md-4">
-                        <h4>Comments</h4>
-                        <span class="badge">{{data.result.Messages.length}}</span>
+                        <h4>Users</h4> {{#data.result.Messages}}
+                        <p class="comment">
+                            <a href="#">{{Username}}</a>
+                        </p>
+                        {{/data.result.Messages}}
                     </div>
                 </div>
             </div>
@@ -37,11 +40,31 @@
     </div>
     <div class="row">
         {{#if data.result.Messages.length}}
-        <h4>Comments</h4>
-        {{#data.result.Messages}}
-            <p>{{Message}}</p>
-        {{/data.result.Messages}}
-        {{/if}}
+        <h4>Comments</h4> {{#data.result.Messages}}
+        <div>
+            <a href="#">{{Username}} writes: </a>
+            <span>{{Content}}</span>
+        </div>
+        <hr> {{/data.result.Messages}} {{/if}}
+        <div class="container">
+            <h1 class="well">Add Comment</h1>
+            <div class="col-lg-12 well">
+                <div class="row">
+                    <form>
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label>Content:</label>
+                                    <textarea rows="10" cols="10" id="content-comment" placeholder="Content" class="form-control">
+                                    </textarea>
+                                </div>
+                            </div>
+                            <button id="btn-add-comment" type="button" class="btn btn-lg btn-info">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <hr>
 </div>
